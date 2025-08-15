@@ -62,7 +62,7 @@ extern "C" {
     extern bool paused;
     extern void reset_audio_buffer_and_unpause();
     extern float audio_volume;
-    extern void load_file(char *file);
+    extern void load_file(const char *file);
     extern uint8_t mem[131072];
     extern uint32_t *mem_highlight;
     extern uint8_t *zx_rom;
@@ -244,7 +244,7 @@ void ShowExampleAppDockSpace(bool* p_open)
                             { "Tape Files (.tap)", "*.tap", "Snapshow Files (.sna)", "*.sna" },
                             pfd::opt::none).result();
                 if (!f.empty()) {
-                    load_file((char *)f[0].c_str());
+                    load_file((const char *)f[0].c_str());
                     audio_paused = false;
                     reset_audio_buffer_and_unpause();
                 } else {

@@ -366,15 +366,11 @@ void read_SNA() {
     }
 }
 
-void load_file(char *file) {
-    printf("loading file \"%s\"\n", file);
-    printf("do_tap = %s;\n", do_tap?"true":"false");
+void load_file(const char *file) {
     if (do_tap) fclose(tap);
-    if (do_tap) printf("wow, it didn't crash at this point! [after fclose(tap)]\n");
     do_tap = true;
     tap_file_size = 0;
     tap = fopen(file,"rb");
-    printf("did fopen(\"%s\",\"rb\");\n",file);
 
     const char *ext_str = get_filename_ext(file);
     file_ext = TAP_FILE;
@@ -405,6 +401,7 @@ void init_zx(int argc, char *argv[], bool init_files) {
             file_ext = TAP_FILE;
             // if (strcmp(ext_str,"tap") == 0) file_ext = TAP_FILE;
             if (strcmp(ext_str,"sna") == 0) file_ext = SNA_FILE;
+
             // get file size
             fseek(tap, 0L, SEEK_END);
             tap_file_size = (int)ftell(tap);
