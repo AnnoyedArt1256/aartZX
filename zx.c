@@ -129,7 +129,7 @@ enum FILE_EXTENSIONS {
     SNA_FILE
 };
 
-int file_ext;
+enum FILE_EXTENSIONS file_ext;
 int cur_time_rewind = 0;
 int cur_mempos_rewind = 0;
 
@@ -371,6 +371,11 @@ void load_file(const char *file) {
     do_tap = true;
     tap_file_size = 0;
     tap = fopen(file,"rb");
+    if (tap == NULL) {
+        printf("ERROR: Failed to open file %s\n",file);
+        do_tap = false;
+        return;
+    }
 
     const char *ext_str = get_filename_ext(file);
     file_ext = TAP_FILE;
@@ -396,16 +401,20 @@ void init_zx(int argc, char *argv[], bool init_files) {
         if (do_tap) {
             // NOTE: for people reading this source, modify any changes here in load_file too!!
             tap = fopen(argv[1],"rb");
+            if (tap == NULL) {
+                printf("ERROR: Failed to open file %s\n",argv[1]);
+                do_tap = false;
+            } else {
+                const char *ext_str = get_filename_ext(argv[1]);
+                file_ext = TAP_FILE;
+                // if (strcmp(ext_str,"tap") == 0) file_ext = TAP_FILE;
+                if (strcmp(ext_str,"sna") == 0) file_ext = SNA_FILE;
 
-            const char *ext_str = get_filename_ext(argv[1]);
-            file_ext = TAP_FILE;
-            // if (strcmp(ext_str,"tap") == 0) file_ext = TAP_FILE;
-            if (strcmp(ext_str,"sna") == 0) file_ext = SNA_FILE;
-
-            // get file size
-            fseek(tap, 0L, SEEK_END);
-            tap_file_size = (int)ftell(tap);
-            fseek(tap, 0L, SEEK_SET);
+                // get file size
+                fseek(tap, 0L, SEEK_END);
+                tap_file_size = (int)ftell(tap);
+                fseek(tap, 0L, SEEK_SET);
+            }
         }
 
         zx_rom = (uint8_t*)malloc(32768*sizeof(uint8_t));
