@@ -129,7 +129,7 @@ jobs:
         mkdir ${{ steps.package-identify.outputs.filename }}
         pushd ${{ steps.package-identify.outputs.filename }}
         ls ${binPath}
-        cp -v ${binPath}/aartZX aartZX.app
+        cp -v ${binPath}/aartZX aartZX
         popd
         
     - name: Package [Linux]
