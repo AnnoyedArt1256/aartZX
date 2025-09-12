@@ -1045,7 +1045,7 @@ static inline void cb_step() {
 }
 
 static inline int index_step(uint16_t *ind, uint8_t opcode) {
-    inc_R;
+    //inc_R;
     switch (opcode) {
 
         // ld reg, #imm
@@ -1550,6 +1550,7 @@ do_opcode_no_cyc:
             break;
 
         case 0xdd: { // IX prefix
+            inc_R;
             opcode = read_PC();
             add_cycles(1);
             if (opcode == 0xDD || opcode == 0xED || opcode == 0xFD)
@@ -1576,6 +1577,7 @@ do_opcode_no_cyc:
         }
 
         case 0xfd: { // IY prefix
+            inc_R;
             opcode = read_PC();
             add_cycles(1);
             if (opcode == 0xDD || opcode == 0xED || opcode == 0xFD)
