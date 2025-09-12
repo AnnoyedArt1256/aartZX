@@ -1006,8 +1006,8 @@ static inline void cb_step() {
         case 0x40: { // bit
             flags.n = 0;
             flags.h = 1;
-            val &= 1 << ((opcode>>3)&7);
             setXYF(val);
+            val &= 1 << ((opcode>>3)&7);
             flags.z = val == 0;
             flags.p = val == 0;
             flags.s = val>>7&1;
