@@ -1553,12 +1553,10 @@ do_opcode_no_cyc:
             opcode = read_PC();
             add_cycles(1);
             if (opcode == 0xDD || opcode == 0xED || opcode == 0xFD) {
-                inc_R;
                 goto do_opcode;
             }
 
             if (opcode == 0xD9 || opcode == 0xEB) {
-                inc_R;
                 //add_cycles(IX_IY_cycle_lut[opcode]);
                 goto do_opcode_no_cyc_R;
             }
@@ -1582,13 +1580,11 @@ do_opcode_no_cyc:
             opcode = read_PC();
             add_cycles(1);
             if (opcode == 0xDD || opcode == 0xED || opcode == 0xFD) {
-                inc_R;
                 goto do_opcode;
             }
 
             if (opcode == 0xD9 || opcode == 0xEB) {
                 //add_cycles(IX_IY_cycle_lut[opcode]);
-                inc_R;
                 goto do_opcode_no_cyc_R;
             }
 
