@@ -20,7 +20,7 @@ a modern ZX Spectrum emulator in C, C++, SDL2 and Dear ImGui
 ## legal
 This emulator is distributed under the zlib license shown here:
 
-> Copyright (c) 2025 AnnoyedArt1256
+> Copyright (c) 2026 AnnoyedArt1256
 > 
 > This software is provided 'as-is', without any express or implied
 > warranty. In no event will the authors be held liable for any damages
