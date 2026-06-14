@@ -589,6 +589,7 @@ void do_oneop() {
             if (tap_size == REG_DE) {
                 // now check if the first byte from the data block == A'
                 // if not then clear carry and execute ret
+                printf("%04x, len = %04x %x\n", regs.ix, tap_size, ftell(tap));
                 uint8_t data_block_byte = fgetc(tap);
                 if (data_block_byte == regs.as) {
                     // (description found from r/emudev IIRC)
